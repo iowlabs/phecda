@@ -233,6 +233,7 @@ class iowPhecda
     void activateTEMP(void);
     void activateEC(void);
     void activateOD(void);
+    void activateLoRa(void);
     void activateAll(void);
     void iowLogo(void);
     void showLogo(void);
@@ -255,6 +256,7 @@ class iowPhecda
     bool temp_sel = false;
     bool od_sel = false ;
     bool ec_sel = false;
+    bool lora_sel = false;
     bool rtc_status = false;
     bool sd_status = false;
     bool display_status = false;

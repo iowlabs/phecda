@@ -1,6 +1,8 @@
 # phecda
 
+Phecda es un dispositivo que permite medir diferentes variables electróquimicas como Ph, ORP, Temperatura, Oxigeno disuelto y Electroconductividad, basados en los sensores desarrollados por la empresa Atlas Scintific. Cuenta con un microcontrolador ESP32 para las tareas de adquisición y envió de datos. Adicionalmente cuenta con un módulo LoRa rfm95 ideal para integrarlo a redes de LoRa o LoRaWan. De este modo puede adaptarse a un gran variedad de aplicaciones IoT al contar con conectividad a BT, WiFi y LoRa. Por otro lado, un slot de micro SD y un RTC onboard implementan la funcionalidad de datalogger para la recopilación de información offline.   Una pantalla OLED permite visualizar los datos de interés en tiempo real.
 
+**IoT**,**Ph**, **Medición ambiental**, **LoRa**, **AtlasScientific**, **datalogger**.
 
 ### Licencias de hardware libre
 1. hardware         CERN OHL V2-S
@@ -38,8 +40,24 @@ El detalle del BOM junto con los respectivos referencias a los part numbers de l
 
 ## Modelo 3D
 
-Para versiones con aplicaciones de laboratorio o condiciones climaticas controladas se diseñó un modelo de enclosure imprimible en PLA o ABS diseñado en la herramienta Fusion360. El diseño considera  el uso de una batería power bank en su interior para la alimentación del dispositivo.
-Los archivos editables se encuentran en el [directorio]('3D model'/). El diseño de la placa se puede adaptar a cajas de proyecto con normas IP65 o superiores para aplicaciones en exterior o en condiciones climaticas más adversas.
+![Render 3D de la placa phecda](hardware/output_files/Phecda_board.png)
+
+Para versiones con aplicaciones de laboratorio o condiciones climaticas controladas se diseñó un modelo de enclosure imprimible en PLA o ABS diseñado en la herramienta Fusion360.
+
+![Enclousure diseñado para phecda]('3D model'/phecda_case_v1.png)
+
+El diseño es un case simple compuesto de dos partes que permite incorporar la pantalla OLED y dejar al descubierto los conectores SMA para las sondas, protegiendo la electrónica interna.
+
+
+| Tapa | Base |
+| -------- | ----------- |
+| ![componente superior del case]('3D model'/phecda_case_v1_tapa.png)|![componente inferior del case]('3D model'/phecda_case_v1_base.png)|
+
+El diseño considera  el uso de una batería power bank en su interior para la alimentación del dispositivo. El montaje se realiza por medio de 3 pernos M3 los cuales se atornillan desde la parte inferior de la base.
+
+Los archivos editables  y los planos de vistas se encuentran en el [directorio]('3D model'/).
+
+El diseño de la placa se puede adaptar a cajas de proyecto con normas IP65 o superiores para aplicaciones en exterior o en condiciones climaticas más adversas.
 
 ## Firmware
 

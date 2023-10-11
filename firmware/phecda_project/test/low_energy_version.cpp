@@ -7,10 +7,14 @@
 #include <Arduino.h>
 #include "iowPhecda.h"
 
+#define SLEEP_TIME  60   // in seconds
+#define TIME_FACTOR 1000000
 
 iowPhecda phecda = iowPhecda();
 uint8_t status;
 String output;
+
+void    mainTask(void);
 
 void setup()
 {
@@ -25,16 +29,19 @@ void setup()
   printlnd(status);
   delay(200);
   phecda.iowLogo();
-  delay(3000);
+  delay(1000);
   phecda.showLogo();
-  delay(3000);
+  delay(1000);
   phecda.showStatus();
   delay(2500);
 
   mainTask();
 }
 
-void loop()
+void loop(){}
+
+
+void mainTask()
 {
   phecda.readSensors();
   output = phecda.pubData();
@@ -42,4 +49,6 @@ void loop()
   phecda.saveData();
   phecda.showData(2500);
 
+  esp_sleep_enable_timer_wakeup(SLEEP_TIME*TIME_FACTOR);
+  esp_deep_sleep_start();
 }

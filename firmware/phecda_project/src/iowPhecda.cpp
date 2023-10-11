@@ -33,15 +33,21 @@ uint8_t iowPhecda::begin()
   if(rtc.begin())      rtc_status = true;
   if(iowsd.uSD_init(SD_CS)) sd_status = true;
   if(display.begin(DISPLAY_ADDRESS,true)) display_status = true ;
-  display.setRotation(2); //IF NOT INVERTED COMMENT THIS LINE
+  if(lora_sel)
+  {
+    LoRa.setPins(RFM_CS, RFM_RST, RFM_DIO0);
+    if(LoRa.begin(915E6)) lora_status = true;
+    LoRa.setSyncWord(0xF3);
+  }
+  display.setRotation(0); //IF NOT INVERTED COMMENT THIS LINE
   display.clearDisplay();
   display.setTextSize(1);
   display.setTextColor(SH110X_WHITE);
 
 
 
-if( rtc_status && display_status && sd_status) return STATUS_OK;
-else return STATUS_ERROR;
+  if( rtc_status && display_status && sd_status) return STATUS_OK;
+  else return STATUS_ERROR;
 }
 
 
@@ -128,6 +134,7 @@ void iowPhecda::activateORP(){orp_sel = true;}
 void iowPhecda::activateTEMP(){temp_sel = true;}
 void iowPhecda::activateEC(){ec_sel = true;}
 void iowPhecda::activateOD(){od_sel = true;}
+void iowPhecda::activateLoRa(){lora_sel = true;}
 
 void iowPhecda::activateAll()
 {
@@ -254,6 +261,14 @@ String iowPhecda::pubData(void)
 
   String json;
   serializeJson(doc_tx, json);
+
+  if(lora_sel)
+  {
+    delayMicroseconds(random(1000)); // random delay for avoid collisions
+    LoRa.beginPacket();
+    LoRa.print(json);
+    LoRa.endPacket();
+  }
   return json;
 }
 
