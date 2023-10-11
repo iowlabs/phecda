@@ -5,9 +5,12 @@ Phecda es un dispositivo que permite medir diferentes variables electróquimicas
 **IoT**,**Ph**, **Medición ambiental**, **LoRa**, **AtlasScientific**, **datalogger**.
 
 ### Licencias de hardware libre
-1. hardware         CERN OHL V2-S
-2. software         GLP V3.0
-3. documentación    CC-BY-SA 4.0
+
+| Tipo de archivo | Licencia libre |
+| --------------- | -------------- |
+| hardware        | CERN OHL V2-S  |
+| software        | GLP V3.0       |
+| documentación   | CC-BY-SA 4.0   |
 
 
 ## Hardware description
@@ -37,6 +40,20 @@ La placa se encuentra basada en un microcontrolador ESP32.
 ### BOM
 El detalle del BOM junto con los respectivos referencias a los part numbers de los componentes desde LCSC,  se puede encontrar en el siguiente [link](hardware/output_files/Phecda_board.csv).
 
+Adicional a la lista de componentes, es necesario comprar desde el proveedor oficial las sondas y la electrónica de backend necesaria para la lectura de las sondas. Estos conmponentes se dejan solo como referencia ya que dependen de la aplicación y el tipo de variables que se deseen medir. En la siguiente lista  se presenta una referencia junto con sus respectivos links.
+
+| Componente | Cantidad | Descripción | link de referencia |
+|----------- | ---------| ----------- | ------------------ |
+|industrial PH probe | 1 | industrial PH, ORP y RTC  probe | [AtlasScientific oficial website](https://atlas-scientific.com/ph/industrial-ph-orp-temp-probe-ph/)|  
+|OD probe | 1 | Lab Grade Dissolved Oxygen Probe | [AtlasScientific oficial website](https://atlas-scientific.com/probes/dissolved-oxygen-probe/)|  
+|EC probe | 1 | Conductivity Probe K 0.1 | [AtlasScientific oficial website](https://atlas-scientific.com/probes/conductivity-probe-k-0-1/)|  
+|Ezo ph | 1 | Readout para la sonda de EC | [AtlasScientific oficial website](https://atlas-scientific.com/embedded-solutions/ezo-ph-circuit/)|  
+|Ezo orp | 1 | Readout para la sonda de ORP | [AtlasScientific oficial website](https://atlas-scientific.com/embedded-solutions/ezo-orp-circuit/)|  
+|Ezo RTC | 1 | Readout para la sonda de RTC | [AtlasScientific oficial website](https://atlas-scientific.com/embedded-solutions/ezo-rtd-temperature-circuit/)|  
+|Ezo OD | 1 | Readout para la sonda de OD | [AtlasScientific oficial website](https://atlas-scientific.com/embedded-solutions/ezo-dissolved-oxygen-circuit/)|  
+|Ezo EC | 1 | Readout para la sonda de EC | [AtlasScientific oficial website](https://atlas-scientific.com/embedded-solutions/ezo-conductivity-circuit/)|  
+|Ezo IVI | 4 | Basic EZO Inline Voltage Isolator | [AtlasScientific oficial website](https://atlas-scientific.com/ezo-accessories/basic-ezo-inline-voltage-isolator/)|  
+
 
 ## Modelo 3D
 
@@ -44,18 +61,18 @@ El detalle del BOM junto con los respectivos referencias a los part numbers de l
 
 Para versiones con aplicaciones de laboratorio o condiciones climaticas controladas se diseñó un modelo de enclosure imprimible en PLA o ABS diseñado en la herramienta Fusion360.
 
-![Enclousure diseñado para phecda]('3D model'/phecda_case_v1.png)
+![Enclousure diseñado para phecda](3Dmodel/phecda_case_v1.png)
 
 El diseño es un case simple compuesto de dos partes que permite incorporar la pantalla OLED y dejar al descubierto los conectores SMA para las sondas, protegiendo la electrónica interna.
 
 
 | Tapa | Base |
 | -------- | ----------- |
-| ![componente superior del case]('3D model'/phecda_case_v1_tapa.png)|![componente inferior del case]('3D model'/phecda_case_v1_base.png)|
+| ![componente superior del case](3Dmodel/phecda_case_v1_tapa.png)|![componente inferior del case](3Dmodel/phecda_case_v1_base.png)|
 
 El diseño considera  el uso de una batería power bank en su interior para la alimentación del dispositivo. El montaje se realiza por medio de 3 pernos M3 los cuales se atornillan desde la parte inferior de la base.
 
-Los archivos editables  y los planos de vistas se encuentran en el [directorio]('3D model'/).
+Los archivos editables  y los planos de vistas se encuentran en el [directorio](3Dmodel/).
 
 El diseño de la placa se puede adaptar a cajas de proyecto con normas IP65 o superiores para aplicaciones en exterior o en condiciones climaticas más adversas.
 
