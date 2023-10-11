@@ -1,5 +1,5 @@
 # phecda
-phecda reposiroty
+
 
 Licencias de hardware libre
 1. hardware         CERN OHL V2-S
@@ -32,7 +32,7 @@ La placa se encuentra basada en un microcontrolador ESP32.
 
 
 ## BOM
-El detalle del BOM se puede encontrar en el siguiente [link](hardware/output_files).
+El detalle del BOM junto con los respectivos referencias a los part numbers de los componentes desde LCSC,  se puede encontrar en el siguiente [link](hardware/output_files/Phecda_board.csv).
 
 
 # Modelo 3D
@@ -48,9 +48,11 @@ debido a la flexibilidad del diseño, es posible cargarle una gran versalidad de
 
 El firmware se desarrollo utilizando PlatformIO, sin embargo se han generado ejemplos de uso compilabes con la plataforma arduino.
 
-En la carpeta [firmware/phecda_project](firmware/phecda_project) se entrega el proyecto completo compilado en su última verión.
-En la carpeta [firmware/examples](firmware/examples) se entregan diferentes archivos de ejemplo para utilizar directamente con arduino.
-En la carpeta [firmware/src](firmware/src) se entregan los archivos fuente de la biblioteca realizada para la placa phecda que integra sus principales funcionalidades.
+|  Archivos  | Descripción |
+| -----------| ----------- |
+| [firmware/phecda_project](firmware/phecda_project) | se entrega el proyecto completo compilado en su última verión.|
+| [firmware/examples](firmware/examples) | se entregan diferentes archivos de ejemplo para utilizar directamente con arduino.|
+| [firmware/src](firmware/src) | se entregan los archivos fuente de la biblioteca realizada para la placa phecda que integra sus principales funcionalidades.|
 
 ## Bibliotecas utilizadas
 A excepción de la biblioteca uSD_iow la cual se encuentra disponible en el repositorio de iowlabs oficial, todas las demas bibliotecas utilizadas se encuentran disponibles dese el administración de bibliotecas oficial de arduino y PlatformIO.
