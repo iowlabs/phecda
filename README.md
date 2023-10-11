@@ -1,17 +1,18 @@
 # phecda
 
 
-Licencias de hardware libre
+
+### Licencias de hardware libre
 1. hardware         CERN OHL V2-S
 2. software         GLP V3.0
 3. documentación    CC-BY-SA 4.0
 
 
-# Hardware description
+## Hardware description
 Las placas fueron diseñadas en KiCad7 stable realease - usando adicionalmente componentes de la biblioteca oficial de  [iowLabs](https://github.com/iowlabs/KiCad_Lib).
 
 
-## Dependencias
+### Dependencias
 La placa se encuentra basada en un microcontrolador ESP32.
 
 - Módulo Lora rfm95.
@@ -20,27 +21,27 @@ La placa se encuentra basada en un microcontrolador ESP32.
 - 4 Módulos EZO AtlasScientific genéricos.
 - 1 Módulo EZO RTC.
 
-## Esquemático
+### Esquemático
 
 ![Detalle del esquemático de la placa phecda](hardware/output_files/Phecda_board.svg)
 
-## Layout
+### Layout
 
 | Top view | Bottom view |
 | -------- | ----------- |
-| ![front view of the pcb form kicad](hardware/output_files/phecda_top.png)|![back view of the pcb form kicad](hardware/output_files/phecda_top.png)|
+| ![front view of the pcb form kicad](hardware/output_files/phecda_top.png)|![back view of the pcb form kicad](hardware/output_files/phecda_bottom.png)|
 
 
-## BOM
+### BOM
 El detalle del BOM junto con los respectivos referencias a los part numbers de los componentes desde LCSC,  se puede encontrar en el siguiente [link](hardware/output_files/Phecda_board.csv).
 
 
-# Modelo 3D
+## Modelo 3D
 
 Para versiones con aplicaciones de laboratorio o condiciones climaticas controladas se diseñó un modelo de enclosure imprimible en PLA o ABS diseñado en la herramienta Fusion360. El diseño considera  el uso de una batería power bank en su interior para la alimentación del dispositivo.
-Los archivos editables se encuentran en el [directorio](3D model). El diseño de la placa se puede adaptar a cajas de proyecto con normas IP65 o superiores para aplicaciones en exterior o en condiciones climaticas más adversas.
+Los archivos editables se encuentran en el [directorio]('3D model'/). El diseño de la placa se puede adaptar a cajas de proyecto con normas IP65 o superiores para aplicaciones en exterior o en condiciones climaticas más adversas.
 
-# Firmware
+## Firmware
 
 El firmware desarrollado representa una recopilación de bibliotecas y controladores para las dependencias de la placa.
 Esta recopilación se implementa en la biblioteca iowPhecda, la cual concentra las principales funcionalidades de la placa. Sin embargo,
@@ -54,7 +55,7 @@ El firmware se desarrollo utilizando PlatformIO, sin embargo se han generado eje
 | [firmware/examples](firmware/examples) | se entregan diferentes archivos de ejemplo para utilizar directamente con arduino.|
 | [firmware/src](firmware/src) | se entregan los archivos fuente de la biblioteca realizada para la placa phecda que integra sus principales funcionalidades.|
 
-## Bibliotecas utilizadas
+### Bibliotecas utilizadas
 A excepción de la biblioteca uSD_iow la cual se encuentra disponible en el repositorio de iowlabs oficial, todas las demas bibliotecas utilizadas se encuentran disponibles dese el administración de bibliotecas oficial de arduino y PlatformIO.
 
 - Arduino json  : bblanchon/ArduinoJson @ ^6.18.5
@@ -65,7 +66,7 @@ A excepción de la biblioteca uSD_iow la cual se encuentra disponible en el repo
 - MQTT          : knolleary/PubSubClient@^2.8
 - LoRa          : sandeepmistry/LoRa @ ^0.8.0
 
-## Ejemplos desisponibles
+### Ejemplos desisponibles
 
 A continuación se entrega un detalle de los ejemplos generados
 
@@ -76,7 +77,7 @@ A continuación se entrega un detalle de los ejemplos generados
 | lora_version.ino | Adicionalmente a la versión simple, activa el módulo lora y envía un el mensaje json cada T segundos. |
 | mqtt_version.ino | Este es un ejemplo como utilizar la tarjeta para enviar los datos vía mqtt a un broker pre-establecido|
 
-## Funciones disponibles
+### Funciones disponibles
 
  - void readAtlasSensors( bool ph_s,bool orp_s,bool temp_s,bool od_s,bool ec_s);
  - uint8_t begin(void);
