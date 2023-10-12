@@ -14,10 +14,10 @@
 
 // Parametros de MQTT  USER DEFINE
 #define MQTT_PORT         1883
-#define MQTT_USER         "iowlabs"
-#define MQTT_PASSWORD     "!iow_woi!"
-#define MQTT_PUBLISH_CH   "ph/tx"
-#define MQTT_RECEIVER_CH  "ph/rx"
+#define MQTT_USER         " "
+#define MQTT_PASSWORD     " "
+#define MQTT_PUBLISH_CH   " "
+#define MQTT_RECEIVER_CH  " "
 
 
 //Wifi and mqtt client
@@ -25,9 +25,9 @@ WiFiClient wifiClient;
 PubSubClient mqtt(wifiClient);
 
 // Conexión a una red y servidor de MQTT
-const char* ssid      = "RC 16 E";//"UDD";//
-const char* password  = "123rc16e";//"udd_2019";//
-const char* mqtt_server = "35.223.234.244";
+const char* ssid      = " ";
+const char* password  = " ";
+const char* mqtt_server = " ";
 
 iowPhecda phecda = iowPhecda();
 uint8_t status;

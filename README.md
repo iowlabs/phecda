@@ -6,7 +6,7 @@ A on board ESP32 microcontroller manages data acquisition and sending tasks. It 
 Phecda can adapt to a wide variety of BT, WiFi or LoRa based IoT applications.
 A micro SD adapter and an onboard RTC implement data logger functionality for offline information collection. An OLED screen allows you to view the data of interest in real time.
 
-**IoT**,**Ph**, **Medición ambiental**, **LoRa**, **AtlasScientific**, **datalogger**.
+**IoT**,**Ph**, **Environmental measurement**, **LoRa**, **AtlasScientific**, **datalogger**.
 
 ### OSHW LICENSES
 
