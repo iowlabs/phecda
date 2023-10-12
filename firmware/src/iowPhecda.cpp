@@ -33,15 +33,21 @@ uint8_t iowPhecda::begin()
   if(rtc.begin())      rtc_status = true;
   if(iowsd.uSD_init(SD_CS)) sd_status = true;
   if(display.begin(DISPLAY_ADDRESS,true)) display_status = true ;
-  display.setRotation(2); //IF NOT INVERTED COMMENT THIS LINE
+  if(lora_sel)
+  {
+    LoRa.setPins(RFM_CS, RFM_RST, RFM_DIO0);
+    if(LoRa.begin(915E6)) lora_status = true;
+    LoRa.setSyncWord(0xF3);
+  }
+  display.setRotation(0); //IF NOT INVERTED COMMENT THIS LINE
   display.clearDisplay();
   display.setTextSize(1);
   display.setTextColor(SH110X_WHITE);
 
 
 
-if( rtc_status && display_status && sd_status) return STATUS_OK;
-else return STATUS_ERROR;
+  if( rtc_status && display_status && sd_status) return STATUS_OK;
+  else return STATUS_ERROR;
 }
 
 
@@ -128,6 +134,7 @@ void iowPhecda::activateORP(){orp_sel = true;}
 void iowPhecda::activateTEMP(){temp_sel = true;}
 void iowPhecda::activateEC(){ec_sel = true;}
 void iowPhecda::activateOD(){od_sel = true;}
+void iowPhecda::activateLoRa(){lora_sel = true;}
 
 void iowPhecda::activateAll()
 {
@@ -157,36 +164,36 @@ void iowPhecda::readAtlasSensors( bool ph_s,bool orp_s,bool temp_s,bool od_s,boo
 
   delay(200);
 
- if(temp_s)
- {
-  temp_sensor.send_read_cmd();
-  delay(1000);
-  temp_sensor.receive_read_cmd();
-  if ((temp_sensor.get_error() == Ezo_board::SUCCESS )&& (temp_sensor.get_last_received_reading() > -1000.0)&& temp_s)
+  if(temp_s)
   {
-    temp =  temp_sensor.get_last_received_reading();
-    temp = (int)(temp*100+0.5)/100.00;
-    if(ph_s)ph_sensor.send_cmd_with_num("T,",temp);
-    if(orp_s)orp_sensor.send_cmd_with_num("T,",temp);
-    if(ec_s)ec_sensor.send_cmd_with_num("T,",temp);
-    if(od_s)do_sensor.send_cmd_with_num("T,",temp);
+    temp_sensor.send_read_cmd();
+    delay(1000);
+    temp_sensor.receive_read_cmd();
+    if ((temp_sensor.get_error() == Ezo_board::SUCCESS )&& (temp_sensor.get_last_received_reading() > -1000.0)&& temp_s)
+    {
+      temp =  temp_sensor.get_last_received_reading();
+      temp = (int)(temp*100+0.5)/100.00;
+      if(ph_s)ph_sensor.send_cmd_with_num("T,",temp);
+      if(orp_s)orp_sensor.send_cmd_with_num("T,",temp);
+      if(ec_s)ec_sensor.send_cmd_with_num("T,",temp);
+      if(od_s)do_sensor.send_cmd_with_num("T,",temp);
+    }
+    else
+    {
+      temp = -90.0;
+      if(ph_s)ph_sensor.send_cmd_with_num("T,",25.0);
+      if(orp_s)orp_sensor.send_cmd_with_num("T,",25.0);
+      if(ec_s)ec_sensor.send_cmd_with_num("T,",25.0);
+      if(od_s)do_sensor.send_cmd_with_num("T,",25.0);
+    }
   }
   else
   {
-    temp = -90.0;
     if(ph_s)ph_sensor.send_cmd_with_num("T,",25.0);
     if(orp_s)orp_sensor.send_cmd_with_num("T,",25.0);
     if(ec_s)ec_sensor.send_cmd_with_num("T,",25.0);
     if(od_s)do_sensor.send_cmd_with_num("T,",25.0);
   }
-}
-else
-{
-  if(ph_s)ph_sensor.send_cmd_with_num("T,",25.0);
-  if(orp_s)orp_sensor.send_cmd_with_num("T,",25.0);
-  if(ec_s)ec_sensor.send_cmd_with_num("T,",25.0);
-  if(od_s)do_sensor.send_cmd_with_num("T,",25.0);
-}
   delay(300);
   if(ph_s)ph_sensor.send_read_cmd();
   if(orp_s)orp_sensor.send_read_cmd();
@@ -254,6 +261,14 @@ String iowPhecda::pubData(void)
 
   String json;
   serializeJson(doc_tx, json);
+
+  if(lora_sel)
+  {
+    delayMicroseconds(random(1000)); // random delay for avoid collisions
+    LoRa.beginPacket();
+    LoRa.print(json);
+    LoRa.endPacket();
+  }
   return json;
 }
 
@@ -273,4 +288,17 @@ void iowPhecda::saveData(void)
   serializeJson(doc_tx, json);
   iowsd.appendFile(SD,FILE_NAME,json.c_str());
   iowsd.appendFile(SD,FILE_NAME,"\n");
+}
+
+void iowPhecda::phCalClear(void)
+{
+  ph_sensor.send_cmd("Cal,clear");
+}
+
+void iowPhecda::phCal(uint8_t val)
+{
+  if(val == 7)ph_sensor.send_cmd("Cal,mid,7.00");
+  if(val == 4)ph_sensor.send_cmd("Cal,low,4.00");
+  if(val == 10)ph_sensor.send_cmd("Cal,high,10.00");
+
 }

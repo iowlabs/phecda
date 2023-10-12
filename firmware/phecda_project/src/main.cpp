@@ -31,7 +31,7 @@ void setup()
   phecda.showStatus();
   delay(2500);
 
-  mainTask();
+  
 }
 
 void loop()

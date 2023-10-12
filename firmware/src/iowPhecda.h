@@ -1,3 +1,9 @@
+/*
+# SPDX-FileCopyrightText: 2023 iowlabs <contacto@iowlabs.com>
+#
+# SPDX-License-Identifier: GPL-3.0-or-later.txt
+*/
+
 #ifndef __IOWPHECDA__
 #define __IOWPHECDA__
 
@@ -31,8 +37,6 @@
 #define RFM_RST      4
 #define RFM_DIO0     17
 #define RFM_DIO1     14
-#define BAT_LVL      35
-
 
 #define PH_ADDRESS    100
 #define ORP_ADDRESS   101
@@ -229,12 +233,15 @@ class iowPhecda
     void activateTEMP(void);
     void activateEC(void);
     void activateOD(void);
+    void activateLoRa(void);
     void activateAll(void);
     void iowLogo(void);
     void showLogo(void);
     void showStatus(void);
     void showData(long time_interval);
     void saveData(void);
+    void phCal(uint8_t val);
+    void phCalClear(void);
 
 
   private:
@@ -251,6 +258,7 @@ class iowPhecda
     bool temp_sel = false;
     bool od_sel = false ;
     bool ec_sel = false;
+    bool lora_sel = false;
     bool rtc_status = false;
     bool sd_status = false;
     bool display_status = false;

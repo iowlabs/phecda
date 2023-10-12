@@ -240,6 +240,8 @@ class iowPhecda
     void showStatus(void);
     void showData(long time_interval);
     void saveData(void);
+    void phCal(uint8_t val);
+    void phCalClear(void);
 
 
   private:

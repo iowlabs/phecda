@@ -1,31 +1,41 @@
-# phecda
+# Phecda
 
-Phecda es un dispositivo que permite medir diferentes variables electroquímicas como pH, ORP, temperatura, oxígeno disuelto y electroconductividad, basados en los sensores desarrollados por la empresa [Atlas Scientific](https://atlas-scientific.com/). 
-Cuenta con un microcontrolador ESP32 para las tareas de adquisición y envío de datos. Adicionalmente, cuenta con un módulo LoRa rfm95 ideal para integrarlo a redes de LoRa o LoRaWan. De este modo, puede adaptarse a un gran variedad de aplicaciones IoT al contar con conectividad a BT, WiFi y LoRa. Por otro lado, un adaptador de micro SD y un RTC onboard implementan la funcionalidad de data logger para la recopilación de información offline. Una pantalla OLED permite visualizar los datos de interés en tiempo real.
+Phecda is a device that allows mesuting different electrochemical variables such as pH, ORP, temperature, dissolved oxygen and electroconductivity, based on sensors developed by [Atlas Scientific](https://atlas-scientific.com/).
+A on board ESP32 microcontroller manages data acquisition and sending tasks. It count with an rfm95 LoRa module, ideal for integration with LoRa or LoRaWan networks.
+
+Phecda can adapt to a wide variety of BT, WiFi or LoRa based IoT applications.
+A micro SD adapter and an onboard RTC implement data logger functionality for offline information collection. An OLED screen allows you to view the data of interest in real time.
 
 **IoT**,**Ph**, **Medición ambiental**, **LoRa**, **AtlasScientific**, **datalogger**.
 
-### Licencias de hardware libre
+### OSHW LICENSES
 
-| Tipo de archivo | Licencia libre |
+| Files           | Open License   |
 | --------------- | -------------- |
 | hardware        | CERN OHL V2-S  |
 | software        | GLP V3.0       |
-| documentación   | CC-BY-SA 4.0   |
+| documentation   | CC-BY-SA 4.0   |
 
 ## Hardware description
-Las placas fueron diseñadas en KiCad7 stable realease - usando adicionalmente componentes de la biblioteca oficial de  [iowLabs](https://github.com/iowlabs/KiCad_Lib).
+The PCB was designed in KiCad7 stable realease and additional components from the official [iowLabs](https://github.com/iowlabs/KiCad_Lib) library.
 
-### Dependencias
-La placa se encuentra basada en un microcontrolador ESP32.
+The pcb can be powered via USB or through the screw terminal block J7 connector. Jumper J2 must be shorted to enable power on the board. Or it can connect to an external On/OFF button.
 
-- Módulo Lora rfm95.
-- Módulo SD.
-- Módulo RTC RV8803.
-- 4 Módulos EZO AtlasScientific genéricos.
-- 1 Módulo EZO RTC.
+To have compatibility with different probes, the board has SMA connectors J13 to J17 or alternatively the terminal blocks J10, J11 and J12.
 
-### Esquemático
+### Dependencies
+The board is based on an ESP32 microcontroller.
+
+- USB communication through IC CH340
+- Lora rfm95 module.
+- microSD socket.
+- RV8803 RTC module.
+- 4 generic EZO AtlasScientific Modules.
+- 4 AtlasScientific in line voltage isolators.
+- 1 EZO RTC Module.
+- OLED display
+
+### Schematic
 
 ![Detalle del esquemático de la placa phecda](hardware/output_files/Phecda_board.svg)
 
@@ -37,11 +47,11 @@ La placa se encuentra basada en un microcontrolador ESP32.
 
 
 ### BOM
-El detalle del BOM junto con los respectivos referencias a los part numbers de los componentes desde LCSC,  se puede encontrar en el siguiente [link](hardware/output_files/Phecda_board.csv).
+The bill of materials with respective references to LCSC part numbers can be found at the following [link](hardware/output_files/Phecda_board.csv).
 
-Adicional a la lista de componentes, es necesario comprar desde el proveedor oficial las sondas y la electrónica de backend necesaria para la lectura de las sondas. Estos componentes se dejan solo como referencia ya que dependen de la aplicación y el tipo de variables que se deseen medir. En la siguiente lista se presenta una referencia junto con sus respectivos links.
+The following table presents a list of references for the probes and reading electronics along with their respective links. These components are left only as a reference since they depend on the application and the type of variables that you want to measure.
 
-| Componente | Cantidad | Descripción | link de referencia |
+| Components | Quantity | Description | link  |
 |----------- | ---------| ----------- | ------------------ |
 |industrial PH probe | 1 | industrial PH, ORP y RTC  probe | [AtlasScientific oficial website](https://atlas-scientific.com/ph/industrial-ph-orp-temp-probe-ph/)|  
 |OD probe | 1 | Lab Grade Dissolved Oxygen Probe | [AtlasScientific oficial website](https://atlas-scientific.com/probes/dissolved-oxygen-probe/)|  
@@ -54,42 +64,42 @@ Adicional a la lista de componentes, es necesario comprar desde el proveedor ofi
 |Ezo IVI | 4 | Basic EZO Inline Voltage Isolator | [AtlasScientific oficial website](https://atlas-scientific.com/ezo-accessories/basic-ezo-inline-voltage-isolator/)|  
 
 
-## Modelo 3D
+## 3D Model
 
 ![Render 3D de la placa phecda](hardware/output_files/Phecda_board.png)
 
-Para versiones con aplicaciones de laboratorio o condiciones climáticas controladas se diseñó un modelo de carcasa imprimible en PLA o ABS diseñado en la herramienta Fusion360.
+For versions with laboratory applications or controlled climate conditions, a printable case  was designed in PLA or ABS using  Fusion360.
 
 ![Enclousure diseñado para phecda](3Dmodel/phecda_case_v1.png)
 
-El diseño es un case simple compuesto de dos partes que permite incorporar la pantalla OLED y dejar al descubierto los conectores SMA para las sondas, protegiendo la electrónica interna.
+The design is a simple case composed of two parts that allows the OLED screen to be incorporated and exposes the SMA connectors for the probes, protecting the internal electronics.
 
-| Tapa | Base |
+| Cover | Base |
 | -------- | ----------- |
 | ![componente superior del case](3Dmodel/phecda_case_v1_tapa.png)|![componente inferior del case](3Dmodel/phecda_case_v1_base.png)|
 
-El diseño considera  el uso de una batería power bank en su interior para la alimentación del dispositivo. El montaje se realiza por medio de 3 pernos M3 los cuales se atornillan desde la parte inferior de la base.
+To power the device, the design consider a powerbank located at the bottom. The assembly of the two pieces is carried out using 3 M3 screws that are screwed from the bottom of the base.
 
-Los archivos editables  y los planos de vistas se encuentran en [directorio](3Dmodel/).
+Editable files and display plans can be found in [directorio](3Dmodel/).
 
-El diseño de la placa se puede adaptar a cajas de proyecto con normas IP65 o superiores para aplicaciones en exterior o en condiciones climáticas adversas.
+The PCB design allows it to fit commercial project enclosures with IP65 standards or higher for outdoor or harsh weather applications.
 
 ## Firmware
 
-El firmware desarrollado representa una recopilación de bibliotecas y controladores para las dependencias de la placa.
-Esta recopilación se implementa en la biblioteca iowPhecda, la cual concentra las principales funcionalidades de la placa. Sin embargo,
-debido a la flexibilidad del diseño, es posible cargarle una gran versalidad de códigos basados en otras bibliotecas.
+The developed firmware represents a collection of libraries and drivers for the board's dependencies.
 
-El firmware se desarrolló utilizando PlatformIO, sin embargo, se han generado ejemplos de uso para [Arduino IDE](https://www.arduino.cc/en/software).
+This collection of useful functions is implemented in the iowPhecda library. However, due to the flexibility of the design, it is possible to load a wide variety of code based on other supported libraries.
 
-|  Archivos  | Descripción |
+The firmware was developed using PlatformIO; however, usage examples were generated for [Arduino IDE] (https://www.arduino.cc/en/software).
+
+|  Folder  | Description |
 | -----------| ----------- |
-| [firmware/phecda_project](firmware/phecda_project) | se entrega el proyecto completo compilado en su última verión.|
-| [firmware/examples](firmware/examples) | se entregan diferentes archivos de ejemplo para utilizar directamente con Arduino.|
-| [firmware/src](firmware/src) | se entregan los archivos fuente de la biblioteca realizada para la placa phecda que integra sus principales funcionalidades.|
+| [firmware/phecda_project](firmware/phecda_project) | The complete project compiled in its last version.|
+| [firmware/examples](firmware/examples) | Arduino compatible example codes .|
+| [firmware/src](firmware/src) | The source files of the library made for phecda.|
 
 ### Bibliotecas utilizadas
-A excepción de la biblioteca uSD_iow la cual se encuentra disponible en el repositorio de iowlabs oficial, todas las demas bibliotecas utilizadas se encuentran disponibles desde el administrador de bibliotecas oficial de Arduino y PlatformIO.
+Except for the uSD_iow library which is available in the official iowlabs repository, all other libraries used are available from the official Arduino and PlatformIO library manager.
 
 - Arduino json       : bblanchon/ArduinoJson @ ^6.18.5
 - Ezo i2c            : mulmer89/EZO I2C Sensors @ 2.0.0+640de15
@@ -99,31 +109,32 @@ A excepción de la biblioteca uSD_iow la cual se encuentra disponible en el repo
 - MQTT               : knolleary/PubSubClient@^2.8
 - LoRa               : sandeepmistry/LoRa @ ^0.8.0
 
-### Ejemplos disponibles
+### Available examples
 
-A continuación se entrega un detalle de los ejemplos generados
-
-| Archivo | Descripción |
+| File | Description |
 |---------|-------------|
-| simple_version.ino  | Este código recopila la información de los sensores pH, ORP y temperatura, y los muestra en pantalla. Adicionalmente, imprime por monitor serial los datos recopilados en formato json |
-| low_energy_version.ino | Esta función implementa las mismas funciones que el código anterior y agrega un módo de bajo consumo |
-| lora_version.ino | Adicionalmente a la versión simple, activa el módulo LoRa y envía un mensaje en formato json cada T segundos. |
-| mqtt_version.ino | Este es un ejemplo de cómo utilizar el dispositivo para enviar los datos vía MQTT a un broker pre-establecido|
+| simple_version.ino  | Collect the data from the pH, ORP and temperature sensors, and displays it on the screen. Print the collected data in json format through the serial monitor. |
+| low_energy_version.ino |  Adds a low-power mode to the simple_version code |
+| lora_version.ino | Activate the LoRa module and send a message in json format. |
+| mqtt_version.ino | This is an example of reading the data and sending it via MQTT to a pre-established broker.|
 
-### Funciones disponibles
+### Available functions
 
- - void readAtlasSensors( bool ph_s,bool orp_s,bool temp_s,bool od_s,bool ec_s);
- - uint8_t begin(void);
- - void readSensors(void);
- - String pubData(void);
- - void activatePH(void);
- - void activateORP(void);
- - void activateTEMP(void);
- - void activateEC(void);
- - void activateOD(void);
- - void activateAll(void);
- - void iowLogo(void);
- - void showLogo(void);
- - void showStatus(void);
- - void showData(long time_interval);
- - void saveData(void);
+- void readAtlasSensors( bool ph_s,bool orp_s,bool temp_s,bool od_s,bool ec_s);
+- uint8_t begin(void);
+- void readSensors(void);
+- String pubData(void);
+- void activatePH(void);
+- void activateORP(void);
+- void activateTEMP(void);
+- void activateEC(void);
+- void activateOD(void);
+- void activateLoRa(void);
+- void activateAll(void);
+- void iowLogo(void);
+- void showLogo(void);
+- void showStatus(void);
+- void showData(long time_interval);
+- void saveData(void);
+- void phCal(uint8_t val);
+- void phCalClear(void);
