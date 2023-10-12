@@ -1,0 +1,8 @@
+PHECDA_CASE_V2 CHANGELOG:
+
+- Rebuilt Dimentions
+- Polished Terminations and joints
+- Eliminated unnecessary supports
+- Optimized File Size
+- Polished interior terminations
+- Optimized contruction time

@@ -70,13 +70,13 @@ The following table presents a list of references for the probes and reading ele
 
 For versions with laboratory applications or controlled climate conditions, a printable case  was designed in PLA or ABS using  Fusion360.
 
-![Enclousure diseñado para phecda](3Dmodel/phecda_case_v1.png)
+![Enclousure diseñado para phecda](3Dmodel/V2/full_view.png)
 
 The design is a simple case composed of two parts that allows the OLED screen to be incorporated and exposes the SMA connectors for the probes, protecting the internal electronics.
 
 | Cover | Base |
 | -------- | ----------- |
-| ![componente superior del case](3Dmodel/phecda_case_v1_tapa.png)|![componente inferior del case](3Dmodel/phecda_case_v1_base.png)|
+| ![componente superior del case](3Dmodel/V2/top_v2.png)|![componente inferior del case](3Dmodel/V2/base_v2.png)|
 
 To power the device, the design consider a powerbank located at the bottom. The assembly of the two pieces is carried out using 3 M3 screws that are screwed from the bottom of the base.
 
