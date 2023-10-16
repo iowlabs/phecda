@@ -12,11 +12,10 @@ A micro SD adapter and an onboard RTC implement data logger functionality for of
 
 ### OSHW LICENSES
 
-| Files           | Open License   |
+| Licenses           | OSHW certification   |
 | --------------- | -------------- |
-| hardware        | CERN OHL V2-S  |
-| software        | GLP V3.0       |
-| documentation   | CC-BY-SA 4.0   |
+| ![OSL](LICENSES/OSL.png)       | ![OSHW](LICENSES/certification-mark-CL000005-stacked.png) |
+
 
 ## Hardware description
 The PCB was designed in KiCad7 stable realease and additional components from the official [iowLabs](https://github.com/iowlabs/KiCad_Lib) library.
