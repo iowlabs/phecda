@@ -14,7 +14,7 @@ A micro SD adapter and an onboard RTC implement data logger functionality for of
 
 | Licenses           | OSHW certification   |
 | --------------- | -------------- |
-| ![OSL](LICENSES/OSL.png)       | ![OSHW](LICENSES/certification-mark-CL000005-stacked.png) |
+| ![OSL](LICENSES/OSL.png)       | ![OSHW](LICENSES/certification-mark-CL000005-stacked.png| width = 50) |
 
 
 ## Hardware description
