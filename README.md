@@ -2,7 +2,7 @@
 
 ![Foto real](3Dmodel/V1/photo_2.jpg)
 
-Phecda is a device that allows mesuting different electrochemical variables such as pH, ORP, temperature, dissolved oxygen and electroconductivity, based on sensors developed by [Atlas Scientific](https://atlas-scientific.com/).
+Phecda is a device that allows measuring different electrochemical variables such as pH, ORP, temperature, dissolved oxygen and electroconductivity, based on sensors developed by [Atlas Scientific](https://atlas-scientific.com/).
 A on board ESP32 microcontroller manages data acquisition and sending tasks. It count with an rfm95 LoRa module, ideal for integration with LoRa or LoRaWan networks.
 
 Phecda can adapt to a wide variety of BT, WiFi or LoRa based IoT applications.
