@@ -79,7 +79,7 @@ The design is a simple case composed of two parts that allows the OLED screen to
 
 | Cover | Base |
 | -------- | ----------- |
-| ![componente superior del case](3Dmodel/V3/Top_v3.png)|![componente inferior del case](3Dmodel/V3/Base_v3.png)|
+| ![componente superior del case](3Dmodel/V3/Top_V3.png)|![componente inferior del case](3Dmodel/V3/Base_V3.png)|
 
 To power the device, the design consider a powerbank located at the bottom. The assembly of the two pieces is carried out using 3 M3 screws that are screwed from the bottom of the base.
 
