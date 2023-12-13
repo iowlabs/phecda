@@ -1,0 +1,4 @@
+PHECDA_CASE_V3 CHANGELOG:
+- Added screw pads on the side
+- Thickenned inernal tabs
+- Better Details
