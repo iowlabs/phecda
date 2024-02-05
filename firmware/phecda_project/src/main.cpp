@@ -23,6 +23,10 @@ int conteo_sec = 0;
 bool mqtt_connected = false;
 bool wifi_status = false;
 
+const char* motor;
+const char* cmd;
+const char* response = RESPONSE_OK;
+
 void setupWiFi()
 {
   delay(10);
@@ -87,10 +91,56 @@ void publishMqtt(char *payload)
 
 }
 
-void PMP_fun_wrapper(void* arg) {
-  Serial.println("Ejecutando PMP...");
-  phecda.PMP_blue();
-  phecda.PMP_red();
+void processCmd(byte* payload, unsigned int length)
+{
+	StaticJsonDocument<256> doc_rx;
+    //const char* json_rx = "{\"id\":\"anw00\",\"cmd\":\"gps\",\"arg\":1}";
+    DeserializationError error_rx;
+    //check for error
+    error_rx = deserializeJson(doc_rx, payload,length);
+    if (error_rx)
+    {
+		printd(F("deserializeJson() failed: "));
+		response = RESPONSE_ERROR_JSON;
+      	printlnd(error_rx.c_str());
+
+    }
+
+    //parsing incoming msg
+
+    motor = doc_rx["motor"];
+    if( strcmp(motor,"B")==0)
+    {
+      cmd = doc_rx["cmd"];
+      const char* val = doc_rx["val"];
+      int min = doc_rx["min"];
+      phecda.PMP_blue_action(cmd,val, min);
+    }
+    else if( strcmp(motor,"R")==0)
+    {
+      cmd = doc_rx["cmd"];
+      const char* val = doc_rx["val"];
+      int min = doc_rx["min"];
+      phecda.PMP_red_action(cmd,val, min);
+    }
+    else
+    {
+      printlnd("msg not for me");
+    }
+}
+
+void mqttCallback(char* topic, byte* payload, unsigned int length)
+{
+	if(DEBUG)
+  	{
+    	Serial.println("-------new message from broker-----");
+    	Serial.print("channel:");
+    	Serial.println(topic);
+    	Serial.print("data:");
+    	Serial.write(payload, length);
+    	Serial.println();
+  	}
+    processCmd(payload,length);
 }
 
 void setup()
@@ -106,6 +156,7 @@ void setup()
 
   setupWiFi();
   mqtt.setServer(MQTT_SERVER,MQTT_PORT);
+  mqtt.setCallback(mqttCallback);
 
   printlnd(status);
   /*
@@ -117,18 +168,6 @@ void setup()
   phecda.showStatus();
   delay(1000);
   */
-
- esp_timer_create_args_t timer_args = {
-    .callback = &PMP_fun_wrapper,
-    .arg = NULL,
-    .name = "my_timer"
-  };
-
-  esp_timer_handle_t my_timer;
-  esp_timer_create(&timer_args, &my_timer);
-
-  // Configura el temporizador para que se ejecute cada 10 segundos
-  esp_timer_start_periodic(my_timer, 10000000); // El tiempo está en microsegundos
 }
 
 void loop()
@@ -139,6 +178,7 @@ void loop()
   //phecda.saveData();
   //phecda.showData(2500);
   publishMqtt((char*) output.c_str());
+  mqtt.loop();
 }
 
 

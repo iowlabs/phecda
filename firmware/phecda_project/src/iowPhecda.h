@@ -55,6 +55,10 @@
 #define RESPONSE_OK     "OK"
 #define RESPONSE_ERROR  "ERROR"
 #define FILE_NAME       "/log.txt"
+#define RESPONSE_ERROR_JSON  	"ERROR_INPUT_JSON"
+#define RESPONSE_UPDATE 		"ERROR_UPDATE"
+#define RESPONSE_WRONG_CHANNEL 	"ERROR_WRONG_CHANNEL"
+#define RESPONSE_ERROR_CMD 		"ERROR_CMD"
 
 #define STATUS_OK     0
 #define STATUS_ERROR  1
@@ -267,6 +271,8 @@ class iowPhecda
     void phCalClear(void);
 	void PMP_blue(void);
 	void PMP_red(void);
+	void PMP_blue_action(const char* comand, const char* valor, int min);
+	void PMP_red_action(const char* comand, const char* valor, int min);
 
 
   private:
