@@ -43,6 +43,8 @@
 #define TEMP_ADDRESS  102
 #define OD_ADDRESS    103
 #define EC_ADDRESS    104
+#define PMP_BLUE_ADDRESS   105
+#define PMP_RED_ADDRESS    106
 
 #define DISPLAY_ADDRESS 0x3C
 #define SCREEN_WIDTH 128 // OLED display width, in pixels
@@ -61,7 +63,11 @@
 #define ERROR_OLED    0b00000100
 #define ERROR_LORA    0b00001000
 
+
 //Macros for enable serial prints
+
+#define DEBUG     1
+
 #if DEBUG
 #define printd(s) {Serial.print((s));}
 #define printlnd(s) {Serial.println((s));}
@@ -70,9 +76,24 @@
 #define printlnd(s)
 #endif
 
+//MQTT stufs
+
+#define MQTT_PORT         1883
+#define MQTT_USER         "iowlabs"
+#define MQTT_PASSWORD     "!iow_woi!"
+#define MQTT_PUBLISH_CH   "phecda/msg"
+#define MQTT_RECEIVER_CH  "phecda/cmd"
+
+
+// WiFi and MQTT parameters
+#define MQTT_PORT        1883
+#define wifi_ssid        "iownwater"
+#define wifi_password    "temp3_NL156$"
+#define MQTT_SERVER      "35.223.234.244"
+
 // Logo IoWLabs
 
-#define DEBUG     1
+
 
 const unsigned char logo_iowlabs [] PROGMEM = {
 	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
@@ -234,6 +255,8 @@ class iowPhecda
     void activateEC(void);
     void activateOD(void);
     void activateLoRa(void);
+	void activatePMP_blue(void);
+	void activatePMP_red(void);
     void activateAll(void);
     void iowLogo(void);
     void showLogo(void);
@@ -242,6 +265,8 @@ class iowPhecda
     void saveData(void);
     void phCal(uint8_t val);
     void phCalClear(void);
+	void PMP_blue(void);
+	void PMP_red(void);
 
 
   private:
@@ -253,6 +278,8 @@ class iowPhecda
     Ezo_board temp_sensor = Ezo_board(TEMP_ADDRESS,"RTD");
     Ezo_board do_sensor   = Ezo_board(OD_ADDRESS,"DO");
     Ezo_board ec_sensor   = Ezo_board(EC_ADDRESS,"EC");
+	Ezo_board pmp_blue 		  = Ezo_board(PMP_BLUE_ADDRESS,"PMP_BLUE");
+	Ezo_board pmp_red 		  = Ezo_board(PMP_RED_ADDRESS,"PMP_RED");
     bool ph_sel = false;
     bool orp_sel = false;
     bool temp_sel = false;
@@ -263,7 +290,8 @@ class iowPhecda
     bool sd_status = false;
     bool display_status = false;
     bool lora_status = false;
-
+	bool pmp_blue_sel = false;
+	bool pmp_red_sel = false;
 
 
 };

@@ -1,3 +1,4 @@
+
 /*
 # SPDX-FileCopyrightText: 2023 iowlabs <contacto@iowlabs.com>
 #
@@ -135,6 +136,8 @@ void iowPhecda::activateTEMP(){temp_sel = true;}
 void iowPhecda::activateEC(){ec_sel = true;}
 void iowPhecda::activateOD(){od_sel = true;}
 void iowPhecda::activateLoRa(){lora_sel = true;}
+void iowPhecda::activatePMP_blue(){pmp_blue_sel = true;}
+void iowPhecda::activatePMP_red(){pmp_red_sel = true;}
 
 void iowPhecda::activateAll()
 {
@@ -143,6 +146,8 @@ void iowPhecda::activateAll()
   temp_sel  = true;
   od_sel    = true;
   ec_sel    = true;
+  pmp_blue_sel = true;
+  pmp_red_sel = true;
 }
 
 void iowPhecda::readSensors()
@@ -301,4 +306,12 @@ void iowPhecda::phCal(uint8_t val)
   if(val == 4)ph_sensor.send_cmd("Cal,low,4.00");
   if(val == 10)ph_sensor.send_cmd("Cal,high,10.00");
 
+}
+void iowPhecda::PMP_blue()
+{
+  pmp_blue.send_cmd_with_num("d,", 0.5);
+}
+void iowPhecda::PMP_red()
+{
+  pmp_red.send_cmd_with_num("d,", -0.5);
 }
