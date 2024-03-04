@@ -1,3 +1,4 @@
+
 /*
 # SPDX-FileCopyrightText: 2023 iowlabs <contacto@iowlabs.com>
 #
@@ -150,6 +151,8 @@ void iowPhecda::activateTEMP(){temp_sel = true;}
 void iowPhecda::activateEC(){ec_sel = true;}
 void iowPhecda::activateOD(){od_sel = true;}
 void iowPhecda::activateLoRa(){lora_sel = true;}
+void iowPhecda::activatePMP_blue(){pmp_blue_sel = true;}
+void iowPhecda::activatePMP_red(){pmp_red_sel = true;}
 
 void iowPhecda::activateAll()
 {
@@ -158,6 +161,8 @@ void iowPhecda::activateAll()
   temp_sel  = true;
   od_sel    = true;
   ec_sel    = true;
+  pmp_blue_sel = true;
+  pmp_red_sel = true;
 }
 
 void iowPhecda::readSensors()
@@ -316,4 +321,78 @@ void iowPhecda::phCal(uint8_t val)
   if(val == 4)ph_sensor.send_cmd("Cal,low,4.00");
   if(val == 10)ph_sensor.send_cmd("Cal,high,10.00");
 
+}
+void iowPhecda::PMP_blue()
+{
+  pmp_blue.send_cmd_with_num("d,", 0.5);
+}
+void iowPhecda::PMP_red()
+{
+  pmp_red.send_cmd_with_num("d,", -0.5);
+}
+
+void iowPhecda::PMP_blue_action(const char* comand, const char* valor, int min)
+{
+  if(strcmp(comand,"x,")==0){
+    printlnd("modo detener");
+    pmp_blue.send_cmd("x");
+  }
+  else if(strcmp(valor,"?")==0){
+    size_t longitudTotal = strlen(comand) + strlen(valor) + 1;
+    char buffer[longitudTotal];
+    snprintf(buffer, sizeof(buffer), "%s%s", comand, valor);
+    const char* resultado = buffer;
+    printlnd("modo ?");
+    printlnd(resultado);
+    pmp_blue.send_cmd(resultado);
+  }
+  else{
+    float numero = atof(valor);
+    printlnd(comand);
+    printlnd(numero);
+    printlnd("modo controlado");
+    printlnd(min);
+    if (min == 0){
+      pmp_blue.send_cmd_with_num(comand, numero);
+    }
+    else{
+      char buffer[20];
+      snprintf(buffer, sizeof(buffer), "%s,%.3f,%d", comand, numero, min);
+      printlnd(buffer);
+      const char* mensaje = buffer;
+	    pmp_blue.send_cmd(mensaje);
+    }
+    
+  }
+}
+void iowPhecda::PMP_red_action(const char* comand, const char* valor, int min)
+{
+  if(strcmp(comand,"x,")==0){
+    printlnd("modo detener");
+    pmp_red.send_cmd("x");
+  }
+  else if(strcmp(valor,"?")==0){
+    size_t longitudTotal = strlen(comand) + strlen(valor) + 1;
+    char buffer[longitudTotal];
+    snprintf(buffer, sizeof(buffer), "%s%s", comand, valor);
+    const char* resultado = buffer;
+    printlnd("modo ?");
+    printlnd(resultado);
+    pmp_red.send_cmd(resultado);
+  }
+  else{
+    float numero = atof(valor);
+    printlnd(numero);
+    printlnd("modo controlado");
+    if (min == 0){
+      pmp_red.send_cmd_with_num(comand, numero);
+    }
+    else{
+      char buffer[20];
+      snprintf(buffer, sizeof(buffer), "%s,%.3f,%d", comand, numero, min);
+      printlnd(buffer);
+      const char* mensaje = buffer;
+	    pmp_red.send_cmd(mensaje);
+    }
+  }
 }

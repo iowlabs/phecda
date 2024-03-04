@@ -43,6 +43,8 @@
 #define TEMP_ADDRESS  102
 #define OD_ADDRESS    103
 #define EC_ADDRESS    104
+#define PMP_BLUE_ADDRESS   105
+#define PMP_RED_ADDRESS    106
 
 #define DISPLAY_ADDRESS 0x3C
 #define SCREEN_WIDTH 128 // OLED display width, in pixels
@@ -53,6 +55,10 @@
 #define RESPONSE_OK     "OK"
 #define RESPONSE_ERROR  "ERROR"
 #define FILE_NAME       "/log.txt"
+#define RESPONSE_ERROR_JSON  	"ERROR_INPUT_JSON"
+#define RESPONSE_UPDATE 		"ERROR_UPDATE"
+#define RESPONSE_WRONG_CHANNEL 	"ERROR_WRONG_CHANNEL"
+#define RESPONSE_ERROR_CMD 		"ERROR_CMD"
 
 #define STATUS_OK     0
 #define STATUS_ERROR  1
@@ -62,9 +68,15 @@
 #define ERROR_LORA    0b00001000
 
 
+<<<<<<< HEAD
 
 #define DEBUG     1
+=======
+>>>>>>> a301bae22ef50e20ed252176bdba08864309c121
 //Macros for enable serial prints
+
+#define DEBUG     1
+
 #if DEBUG
 #define printd(s) {Serial.print((s));}
 #define printlnd(s) {Serial.println((s));}
@@ -72,6 +84,21 @@
 #define printd(s)
 #define printlnd(s)
 #endif
+
+//MQTT stufs
+
+#define MQTT_PORT         1883
+#define MQTT_USER         "iowlabs"
+#define MQTT_PASSWORD     "!iow_woi!"
+#define MQTT_PUBLISH_CH   "phecda/msg"
+#define MQTT_RECEIVER_CH  "phecda/cmd"
+
+
+// WiFi and MQTT parameters
+#define MQTT_PORT        1883
+#define wifi_ssid        "iownwater"
+#define wifi_password    "temp3_NL156$"
+#define MQTT_SERVER      "35.223.234.244"
 
 // Logo IoWLabs
 
@@ -237,6 +264,8 @@ class iowPhecda
     void activateEC(void);
     void activateOD(void);
     void activateLoRa(void);
+	void activatePMP_blue(void);
+	void activatePMP_red(void);
     void activateAll(void);
     void iowLogo(void);
     void showLogo(void);
@@ -245,6 +274,10 @@ class iowPhecda
     void saveData(void);
     void phCal(uint8_t val);
     void phCalClear(void);
+	void PMP_blue(void);
+	void PMP_red(void);
+	void PMP_blue_action(const char* comand, const char* valor, int min);
+	void PMP_red_action(const char* comand, const char* valor, int min);
 
 
   private:
@@ -259,6 +292,8 @@ class iowPhecda
     Ezo_board temp_sensor = Ezo_board(TEMP_ADDRESS,"RTD");
     Ezo_board do_sensor   = Ezo_board(OD_ADDRESS,"DO");
     Ezo_board ec_sensor   = Ezo_board(EC_ADDRESS,"EC");
+	Ezo_board pmp_blue 		  = Ezo_board(PMP_BLUE_ADDRESS,"PMP_BLUE");
+	Ezo_board pmp_red 		  = Ezo_board(PMP_RED_ADDRESS,"PMP_RED");
     bool ph_sel = false;
     bool orp_sel = false;
     bool temp_sel = false;
@@ -269,6 +304,12 @@ class iowPhecda
     bool sd_status = false;
     bool display_status = false;
     bool lora_status = false;
+<<<<<<< HEAD
+=======
+	bool pmp_blue_sel = false;
+	bool pmp_red_sel = false;
+
+>>>>>>> a301bae22ef50e20ed252176bdba08864309c121
 
 };
 
