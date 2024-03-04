@@ -24,11 +24,10 @@ void setup()
 
   delay(200);
   phecda.iowLogo();
-  delay(3000);
+  delay(2000);
   phecda.showLogo();
-  delay(3000);
-  phecda.showStatus();
-  delay(3000);
+  delay(2000);
+
 }
 
 void loop()
@@ -38,5 +37,4 @@ void loop()
   Serial.println(output);
   phecda.saveData();
   phecda.showData(2500);
-
 }

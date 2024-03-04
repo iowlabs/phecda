@@ -49,7 +49,7 @@
 #define SCREEN_HEIGHT 64 // OLED display height, in pixels
 #define OLED_RESET     -1 // Reset pin # (or -1 if sharing Arduino reset pin)
 
-#define ID              "n01"
+#define ID              "phecda-01"
 #define RESPONSE_OK     "OK"
 #define RESPONSE_ERROR  "ERROR"
 #define FILE_NAME       "/log.txt"
@@ -61,6 +61,9 @@
 #define ERROR_OLED    0b00000100
 #define ERROR_LORA    0b00001000
 
+
+
+#define DEBUG     1
 //Macros for enable serial prints
 #if DEBUG
 #define printd(s) {Serial.print((s));}
@@ -72,7 +75,7 @@
 
 // Logo IoWLabs
 
-#define DEBUG     1
+
 
 const unsigned char logo_iowlabs [] PROGMEM = {
 	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
@@ -247,6 +250,9 @@ class iowPhecda
   private:
     RV8803 rtc;
     USD_IOW iowsd;
+	//SPI SD
+	SPIClass spi2 =  SPIClass(HSPI);
+
     Adafruit_SH1106G display = Adafruit_SH1106G(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
     Ezo_board ph_sensor   = Ezo_board(PH_ADDRESS,"PH");
     Ezo_board orp_sensor  = Ezo_board(ORP_ADDRESS,"ORP");
@@ -263,8 +269,6 @@ class iowPhecda
     bool sd_status = false;
     bool display_status = false;
     bool lora_status = false;
-
-
 
 };
 

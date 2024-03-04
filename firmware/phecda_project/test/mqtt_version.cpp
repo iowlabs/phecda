@@ -13,21 +13,21 @@
 
 
 // Parametros de MQTT  USER DEFINE
-#define MQTT_PORT         1883
-#define MQTT_USER         " "
-#define MQTT_PASSWORD     " "
-#define MQTT_PUBLISH_CH   " "
-#define MQTT_RECEIVER_CH  " "
 
+#define MQTT_PORT         1883
+#define MQTT_USER         "iowlabs"
+#define MQTT_PASSWORD     "!iow_woi!"
+#define MQTT_PUBLISH_CH   "testph"
+#define MQTT_RECEIVER_CH  "testph/rx"
 
 //Wifi and mqtt client
 WiFiClient wifiClient;
 PubSubClient mqtt(wifiClient);
 
 // Conexión a una red y servidor de MQTT
-const char* ssid      = " ";
-const char* password  = " ";
-const char* mqtt_server = " ";
+const char* ssid      	= "iownwater";
+const char* password  	= "temp3_NL156$";
+const char* mqtt_server = "35.223.234.244";
 
 iowPhecda phecda = iowPhecda();
 uint8_t status;
@@ -43,34 +43,28 @@ bool    reconnect();
 
 void setup()
 {
-  Serial.begin(115200);
-  phecda.activatePH();
-  phecda.activateTEMP();
-  phecda.activateORP();
+  	Serial.begin(115200);
+  	phecda.activatePH();
+  	phecda.activateTEMP();
+  	phecda.activateORP();
 
-  status = phecda.begin();
+  	status = phecda.begin();
 
+  	printlnd(status);
 
-  printlnd(status);
-  delay(200);
-  phecda.iowLogo();
-  delay(1000);
-  phecda.showLogo();
-  delay(1000);
-  phecda.showStatus();
-  delay(1000);
-
+  	delay(1000);
+	setupWiFi();
+	mqtt.setServer(mqtt_server,MQTT_PORT);
 }
 
 void loop()
 {
-  phecda.readSensors();
-  output = phecda.pubData();
-  Serial.println(output);
-  phecda.saveData();
-  phecda.showData(2500);
-  publishMqtt((char*) output.c_str());
-
+	phecda.readSensors();
+  	output = phecda.pubData();
+  	Serial.println(output);
+  	phecda.saveData();
+  	phecda.showData(2500);
+  	publishMqtt((char*) output.c_str());
 }
 
 
@@ -103,7 +97,7 @@ bool reconnect()
     while (!mqtt.connected())
     {
         printd("Attempting MQTT connection...");
-        if (mqtt.connect(id, MQTT_USER , MQTT_PASSWORD))
+        if (mqtt.connect(ID, MQTT_USER , MQTT_PASSWORD))
         {
             printlnd("connected");
             mqtt.subscribe(MQTT_RECEIVER_CH);
@@ -131,8 +125,7 @@ bool reconnect()
 
 void publishMqtt(char *payload)
 {
-  setupWiFi();
-  mqtt.setServer(mqtt_server,MQTT_PORT);
+
 
   if(!mqtt.connected())
   {

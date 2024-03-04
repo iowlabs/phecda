@@ -27,8 +27,10 @@ uint8_t iowPhecda::begin()
   digitalWrite(ORP_EN ,LOW);
   digitalWrite(OD_EN ,LOW);
   digitalWrite(EC_EN ,LOW);
-  digitalWrite(SD_CS  ,LOW);
+  digitalWrite(SD_CS  ,HIGH);
   Wire.begin();
+
+
 
   if(rtc.begin())      rtc_status = true;
   if(iowsd.uSD_init(SD_CS)) sd_status = true;
@@ -116,17 +118,30 @@ void iowPhecda::showData(long time_interval)
   display.display();
   delay(time_interval);
   display.clearDisplay();
-  display.setCursor(0, 0);
-  display.println("EC:");
-  display.setCursor(50, 0);
-  display.print(int(ec));
-  display.setCursor(0, 16);
-  display.println("OD:");
-  display.setCursor(50, 16);
-  display.print(int(od));
-  display.display();
-  delay(time_interval);
-  display.clearDisplay();display.display();
+  if (ec_sel)
+  {
+	  display.setCursor(0, 0);
+	  display.println("EC:");
+	  display.setCursor(50, 0);
+	  display.print(int(ec));
+
+  }
+  if(od_sel)
+  {
+	  display.setCursor(0, 16);
+	  display.println("OD:");
+	  display.setCursor(50, 16);
+	  display.print(int(od));
+  }
+  if( ec_sel or od_sel)
+  {
+	  display.display();
+	  delay(time_interval);
+  	  display.clearDisplay();
+	  display.display();
+  }
+
+
 }
 
 void iowPhecda::activatePH(){ph_sel = true;}

@@ -1,42 +1,42 @@
-,,,,,,
-item,Reference(s),Quantity,Value,Footprint,Supplier,Supplier part number
-Battery holder,BT1,1,Battery_Cell,Battery:BatteryHolder_Keystone_3000_1x12mm,LCSC,C964819
-CAP ceramic,"C1, C2, C3, C4, C8",5,100n,0603,LCSC,C1591
-CAP ceramic,C5,1,10u,1206,LCSC,C1849
-CAP ceramic,C6,1,10n,0603,LCSC,C100042
-CAP ceramic,C7,1,10u,0805,LCSC,C386019
-CAP ceramic,C9,1,4.7u,0805,LCSC,C98192
-CAP ceramic,"C10, C11",2,1u,0603,LCSC,C5673
-LED SMD BLUE,D1,1,LED,0603,LCSC,C99290
-Diode BAS70,D2,1,BAS70-05,Package_TO_SOT_SMD:SOT-23,LCSC,C131857
-Diode schottky,D3,1,D_Schottky,Diode_SMD:D_SMA,LCSC,C85098
-Fuse,F1,1,FUSE,1206,LCSC,C553921
-,"H1, H2, H3, H4",4,MountingHole,MountingHole:MountingHole_2.2mm_M2,,
-USB micro b,J1,1,USB_B_Micro,Connector_USB:USB_Micro-B_Amphenol_10118194_Horizontal,LCSC,C132563
-Header male 2x1 p2.54,"J2,J3",2,HDR-2x1,PinHeader_1x02_P2.54mm_Vertical,LCSC,C180247
-Solder Jumper,J4,1,Conn_01x02,SolderJumper-2_P1.3mm_Open_RoundedPad1.0x1.5mm,,
-Connector ufl,J5,1,Conn_Coaxial,U.FL_Molex_MCRF_73412-0110_Vertical,LCSC,C88374
-Micro SD holder push push,J6,1,~,IoWLabsConnectors:microSD_push_push,LCSC,C91145
-Screw block terminal 2x1 p5,"J7, J10, J11, J12",4,HDR-2x1,IoWLabsConnectors:Tb-2x1-5p-TH-V,LCSC,C1509679
-Connector jst XA 4x1 p2.5,"J8, J9",2,HDR-4x1,Connector_JST:JST_XA_B04B-XASK-1_1x04_P2.50mm_Vertical,LCSC,C37815
-Connector SMA,"J13, J14, J15, J16, J17",5,Conn_Coaxial,Connector_Coaxial:SMA_Amphenol_132289_EdgeMount,LCSC,C1509221
-Solder Jumper,"JP1, JP2, JP3, JP4",4,SolderJumper_2_Open,Jumper:SolderJumper-2_P1.3mm_Open_RoundedPad1.0x1.5mm,,
-LMBT3904 dual npn transistor,Q1,1,Q_Dual_NPN LMBT3904,Package_TO_SOT_SMD:SOT-363_SC-70-6_Handsoldering,LCSC,C131781
-Pmos transistor,Q2,1,Q_PMOS_GSD,Package_TO_SOT_SMD:SOT-23,LCSC,C518789
-Pmos transistor,"Q3, Q4",2,BSS138,Package_TO_SOT_SMD:SOT-23,LCSC,C400505
-RES SMD,"R2, R3",2,200,0603,LCSC,C8218
-RES SMD,R6,1,330,0603,LCSC,C105881
-RES SMD,"R1, R4, R5, R7, R8,R9, R21, R22, R23, R24",10,10k,0603,LCSC,C25804
-RES SMD,"R10, R11, R12, R13, R14",5,3.3k,0603,LCSC,C25995
-RES SMD,"R15, R16",2,100k,0603,LCSC,C2907088
-RES SMD,"R17, R18",2,2.2k,0603,LCSC,C2907117
-RES SMD,"R19, R20",2,4.7k,0603,LCSC,C99782
-Switch button smd,"SW1, SW2",2,SW_DIP_x02,IoWLabs:SMD_SWITCH,LCSC,C128941
-ESP32,U1,1,ESP32-WROOM-32D,RF_Module:ESP32-WROOM-32,LCSC,C473012
-CH340 usb to serial,U2,1,CH340C,Package_SO:SOIC-16_3.9x9.9mm_P1.27mm,LCSC,C84681
-RTC RV-8803,U3,1,RV-8803,IoWLabs:SON-8,LCSC,C2846926
-LORA module RFM95 915hz,U4,1,RFM95W-915S2,RF_Module:HOPERF_RFM9XW_SMD,LCSC,C2844473
-LDO 3.3,U5,1,AP2112K-3.3,Package_TO_SOT_SMD:SOT-23-5,LCSC,C150742
-Header male 7x1 p2.54,X1,1,E32,Connector_PinHeader_2.54mm:PinHeader_1x07_P2.54mm_Vertical,LCSC,C492406
-Header female 5x1 p2.54,"X2, X3, X4, X5",8,Ezo_ivi_iso,IoWLabsModules:Ezo_iso,LCSC,C2935976
-Header female 3x1 p2.54,"X6, X7, X8, X9, X10",10,Ezp-generic,IoWLabsModules:Ezo_generic,LCSC,C358717
+,,,,
+item,Reference(s),Quantity,Value,Supplier part number
+Battery holder,BT1,1,Battery_Cell,C964819
+CAP ceramic,"C1, C2, C3, C4, C8",5,100n,C1591
+CAP ceramic,C5,1,10u,C1849
+CAP ceramic,C6,1,10n,C100042
+CAP ceramic,C7,1,10u,C386019
+CAP ceramic,C9,1,4.7u,C98192
+CAP ceramic,"C10, C11",2,1u,C5673
+LED SMD BLUE,D1,1,LED,C99290
+Diode BAS70,D2,1,BAS70-05,C131857
+Diode schottky,D3,1,D_Schottky,C85098
+Fuse,F1,1,FUSE,C553921
+,"H1, H2, H3, H4",4,MountingHole,
+USB micro b,J1,1,USB_B_Micro,C132563
+Header male 2x1 p2.54,"J2,J3",2,HDR-2x1,C180247
+Solder Jumper,J4,1,Conn_01x02,
+Connector ufl,J5,1,Conn_Coaxial,C88374
+Micro SD holder push push,J6,1,~,C91145
+Screw block terminal 2x1 p5,"J7, J10, J11, J12",4,HDR-2x1,C1509679
+Connector jst XA 4x1 p2.5,"J8, J9",2,HDR-4x1,C37815
+Connector SMA,"J13, J14, J15, J16, J17",5,Conn_Coaxial,C1509221
+Solder Jumper,"JP1, JP2, JP3, JP4",4,SolderJumper_2_Open,
+LMBT3904 dual npn transistor,Q1,1,Q_Dual_NPN LMBT3904,C131781
+Pmos transistor,Q2,1,Q_PMOS_GSD,C518789
+Pmos transistor,"Q3, Q4",2,BSS138,C400505
+RES SMD,"R2, R3",2,200,C8218
+RES SMD,R6,1,330,C105881
+RES SMD,"R1, R4, R5, R7, R8,R9, R21, R22, R23, R24",10,10k,C25804
+RES SMD,"R10, R11, R12, R13, R14",5,3.3k,C25995
+RES SMD,"R15, R16",2,100k,C2907088
+RES SMD,"R17, R18",2,2.2k,C2907117
+RES SMD,"R19, R20",2,4.7k,C99782
+Switch button smd,"SW1, SW2",2,SW_DIP_x02,C128941
+ESP32,U1,1,ESP32-WROOM-32D,C473012
+CH340 usb to serial,U2,1,CH340C,C84681
+RTC RV-8803,U3,1,RV-8803,C2846926
+LORA module RFM95 915hz,U4,1,RFM95W-915S2,C2844473
+LDO 3.3,U5,1,AP2112K-3.3,C150742
+Header male 7x1 p2.54,X1,1,E32,C492406
+Header female 5x1 p2.54,"X2, X3, X4, X5",8,Ezo_ivi_iso,C2935976
+Header female 3x1 p2.54,"X6, X7, X8, X9, X10",10,Ezp-generic,C358717
