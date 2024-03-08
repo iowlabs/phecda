@@ -31,10 +31,30 @@ uint8_t iowPhecda::begin()
   digitalWrite(SD_CS  ,HIGH);
   Wire.begin();
 
+  delay(200);
 
-
+  EEPROM.begin(sizeof(intentosSD));
+  EEPROM.get(0, intentosSD);
+  Serial.print("Intentos SD:");
+  Serial.println(intentosSD);
+  if(intentosSD > 1){
+    EEPROM.put(0, 0);
+    EEPROM.commit();
+  }
   if(rtc.begin())      rtc_status = true;
-  if(iowsd.uSD_init(SD_CS)) sd_status = true;
+  if (intentosSD <= 1) {
+    if(iowsd.uSD_init(SD_CS)){
+      sd_status = true;
+    }
+    else{
+      Serial.println("Error al inicializar la tarjeta SD");
+      intentosSD++;
+      EEPROM.put(0, intentosSD);
+      EEPROM.commit();
+      delay(1200);
+      ESP.restart();
+    }
+  }
   if(display.begin(DISPLAY_ADDRESS,true)) display_status = true ;
   if(lora_sel)
   {
@@ -151,8 +171,6 @@ void iowPhecda::activateTEMP(){temp_sel = true;}
 void iowPhecda::activateEC(){ec_sel = true;}
 void iowPhecda::activateOD(){od_sel = true;}
 void iowPhecda::activateLoRa(){lora_sel = true;}
-void iowPhecda::activatePMP_blue(){pmp_blue_sel = true;}
-void iowPhecda::activatePMP_red(){pmp_red_sel = true;}
 
 void iowPhecda::activateAll()
 {
@@ -161,8 +179,6 @@ void iowPhecda::activateAll()
   temp_sel  = true;
   od_sel    = true;
   ec_sel    = true;
-  pmp_blue_sel = true;
-  pmp_red_sel = true;
 }
 
 void iowPhecda::readSensors()

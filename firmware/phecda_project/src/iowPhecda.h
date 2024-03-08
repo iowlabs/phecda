@@ -20,6 +20,7 @@
 #include <ArduinoJson.h>
 #include <LoRa.h>
 #include <WiFi.h>
+#include <EEPROM.h>
 //#include <PubSubClient.h>
 
 
@@ -67,12 +68,6 @@
 #define ERROR_OLED    0b00000100
 #define ERROR_LORA    0b00001000
 
-
-<<<<<<< HEAD
-
-#define DEBUG     1
-=======
->>>>>>> a301bae22ef50e20ed252176bdba08864309c121
 //Macros for enable serial prints
 
 #define DEBUG     1
@@ -304,13 +299,8 @@ class iowPhecda
     bool sd_status = false;
     bool display_status = false;
     bool lora_status = false;
-<<<<<<< HEAD
-=======
-	bool pmp_blue_sel = false;
-	bool pmp_red_sel = false;
-
->>>>>>> a301bae22ef50e20ed252176bdba08864309c121
-
+	bool SD_conect = false;
+	int intentosSD = 0;
 };
 
 #endif
