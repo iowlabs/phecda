@@ -42,19 +42,19 @@ uint8_t iowPhecda::begin()
     EEPROM.commit();
   }
   if(rtc.begin())      rtc_status = true;
-  if (intentosSD <= 1) {
-    if(iowsd.uSD_init(SD_CS)){
-      sd_status = true;
-    }
-    else{
-      Serial.println("Error al inicializar la tarjeta SD");
-      intentosSD++;
-      EEPROM.put(0, intentosSD);
-      EEPROM.commit();
-      delay(1200);
-      ESP.restart();
-    }
-  }
+//  if (intentosSD <= 1) {
+//    if(iowsd.uSD_init(SD_CS)){
+//      sd_status = true;
+//    }
+//    else{
+//      Serial.println("Error al inicializar la tarjeta SD");
+//      intentosSD++;
+//     EEPROM.put(0, intentosSD);
+//      EEPROM.commit();
+//      delay(1200);
+//      ESP.restart();
+//    }
+//  }
   if(display.begin(DISPLAY_ADDRESS,true)) display_status = true ;
   if(lora_sel)
   {
@@ -289,11 +289,13 @@ String iowPhecda::pubData(void)
 
   doc_tx["id"]    = ID;
   doc_tx["time"]  = timestamp;
-  if(temp_sel)doc_tx["temp"]  = temp;
-  if(ph_sel)  doc_tx["ph"]    = ph;
-  if(orp_sel) doc_tx["orp"]   = orp;
-  if(od_sel)  doc_tx["od"]    = od;
-  if(ec_sel)  doc_tx["ec"]    = ec;
+  if(temp_sel)doc_tx["temp"]  = round2(temp);
+  if(ph_sel)  doc_tx["ph"]    = round2(ph);
+  if(orp_sel) doc_tx["orp"]   = round2(orp);
+  if(od_sel)  doc_tx["od"]    = round2(od);
+  if(ec_sel)  doc_tx["ec"]    = round2(ec);
+
+  
 
   String json;
   serializeJson(doc_tx, json);
@@ -411,4 +413,10 @@ void iowPhecda::PMP_red_action(const char* comand, const char* valor, int min)
 	    pmp_red.send_cmd(mensaje);
     }
   }
+}
+
+
+float iowPhecda::round2(float value)
+{
+    return (int)(value * 100 + 0.5) / 100.0;
 }

@@ -301,6 +301,7 @@ class iowPhecda
     bool lora_status = false;
 	bool SD_conect = false;
 	int intentosSD = 0;
+	float round2(float value);
 };
 
 #endif
