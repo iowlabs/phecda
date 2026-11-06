@@ -1,3 +1,6 @@
 .pio
 .clang_complete
 .gcc-flags.json
+
+# Local credentials (see include/secrets.example.h)
+include/secrets.h
