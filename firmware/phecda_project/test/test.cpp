@@ -83,8 +83,11 @@ TODO:
 
 // Parametros de MQTT
 #define MQTT_PORT         1883
-#define MQTT_USER         "iowlabs"
-#define MQTT_PASSWORD     "!iow_woi!"
+#if __has_include("secrets.h")
+#include "secrets.h"
+#else
+#include "secrets.example.h"
+#endif
 #define MQTT_PUBLISH_CH   "ph/tx"
 #define MQTT_RECEIVER_CH  "ph/rx"
 
@@ -136,10 +139,11 @@ PubSubClient mqtt(wifiClient);
 
 
 // Conexión a una red y servidor de MQTT
-const char* ssid      = "RC 16 E";//"UDD";//
-const char* password  = "123rc16e";//"udd_2019";//
+// Credentials come from include/secrets.h (see include/secrets.example.h)
+const char* ssid      = wifi_ssid;
+const char* password  = wifi_password;
 
-const char* mqtt_server = "35.223.234.244";
+const char* mqtt_server = MQTT_SERVER;
 
   RTC_DS3231 rtc;
   USD_IOW uSD_card(SD_CS);
