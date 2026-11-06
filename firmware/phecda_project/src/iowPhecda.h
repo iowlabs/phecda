@@ -83,17 +83,18 @@
 //MQTT stufs
 
 #define MQTT_PORT         1883
-#define MQTT_USER         "iowlabs"
-#define MQTT_PASSWORD     "!iow_woi!"
 #define MQTT_PUBLISH_CH   "phecda/msg"
 #define MQTT_RECEIVER_CH  "phecda/cmd"
 
 
-// WiFi and MQTT parameters
-#define MQTT_PORT        1883
-#define wifi_ssid        "iownwater"
-#define wifi_password    "temp3_NL156$"
-#define MQTT_SERVER      "35.223.234.244"
+// WiFi and MQTT credentials
+// Copy include/secrets.example.h to include/secrets.h and fill in your values.
+// secrets.h is ignored by git, so credentials never end up in the repository.
+#if __has_include("secrets.h")
+#include "secrets.h"
+#else
+#include "secrets.example.h"
+#endif
 
 // Logo IoWLabs
 
